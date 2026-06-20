@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Complaint App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Customer Complaint Form</h1>
+
+    <form method="POST" class="form-box">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Complaint:</label>
+        <textarea name="complaint" rows="6" required></textarea>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+    <hr>
+
+    <h2>Latest AI Generated Reply</h2>
+
+    <div class="card">
+        {% if ai_reply %}
+            <p>{{ ai_reply }}</p>
+        {% else %}
+            <p>No AI reply generated yet.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <h2>Complaint History</h2>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Complaint</th>
+                <th>AI Reply</th>
+                <th>Created At</th>
+            </tr>
+
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint[0] }}</td>
+                <td>{{ complaint[1] }}</td>
+                <td>{{ complaint[2] }}</td>
+                <td>{{ complaint[3] }}</td>
+                <td>{{ complaint[4] }}</td>
+                <td>{{ complaint[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
